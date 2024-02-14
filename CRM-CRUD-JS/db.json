@@ -2,10 +2,17 @@
   "clientes": [
     {
       "nombre": "Juan NUEVO!",
-      "email": "correo2@correo.com",
+      "correo": "correo2@correo.com",
       "telefono": "12",
       "empresa": "12212",
-      "id": 26
+      "id": "26"
+    },
+    {
+      "id": 1707942269255,
+      "nombre": "Elmariana",
+      "correo": "cuicui@cuimultiple.com",
+      "telefono": "0000",
+      "empresa": "PENEX S.A"
     }
   ]
 }
