@@ -1,10 +1,20 @@
-import { listarClientes } from "./funciones.js";
+import { listarClientes, confirmarEliminar } from "./funciones.js";
 
 (function(){
     // variables
     const url = 'http://localhost:3000/clientes';
-    const tablaBody = document.querySelector('#listado-clientes');
+
+    document.addEventListener('DOMContentLoaded', () =>{
+
+        const tablaBody = document.querySelector('#listado-clientes');
 
 
-    listarClientes(url, tablaBody);
+        listarClientes(url, tablaBody);
+
+        tablaBody.addEventListener('click', confirmarEliminar);
+
+
+    })
+    
+
 })()

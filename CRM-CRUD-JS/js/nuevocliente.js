@@ -22,7 +22,7 @@ import { mostrarAlerta, cliente, agregarClienteAPI} from "./funciones.js";
 
     // funciones
 
-    function agregarCliente(e){
+function agregarCliente(e){
         e.preventDefault();
 
         // quitando el valor de los inputs al enviar
@@ -42,11 +42,18 @@ import { mostrarAlerta, cliente, agregarClienteAPI} from "./funciones.js";
         cliente.correo = email;
         cliente.telefono = telefono;
         cliente.empresa = empresa;
-        cliente.id = Date.now();
+        cliente.id = String(Date.now());
 
         
         
-        agregarClienteAPI({...cliente})
+        agregarClienteAPI({...cliente});
+
+        
+        
+        
+
+        
+        
     }
 
     

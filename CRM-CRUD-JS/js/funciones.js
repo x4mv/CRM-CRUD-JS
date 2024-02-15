@@ -42,13 +42,13 @@ export async function agregarClienteAPI(clienteObjeto){
                 clienteObjeto
             )
         });
-        
+
+
+        window.location.href = 'index.html'
+
     } catch (error) {
         console.log(error);
     }
-    
-    
-
 
 }
 
@@ -76,7 +76,7 @@ export async function listarClientes(url, tabla){
                     </td>
                     <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5">
                         <a href="editar-cliente.html?id=${id}" class="text-teal-600 hover:text-teal-900 mr-5">Editar</a>
-                        <a href="#" data-cliente="${id}" class="text-red-600 hover:text-red-900">Eliminar</a>
+                        <a href="#" data-cliente="${id}" class="text-red-600 hover:text-red-900 eliminar">Eliminar</a>
                     </td>
                 </tr>
             `;
@@ -89,10 +89,67 @@ export async function listarClientes(url, tabla){
     
 }
 
-export async function obtenerCliente(id){
-    console.log(id);
+
+export async function confirmarEliminar(e){
+    
+    if (e.target.classList.contains('eliminar')){
+        const id = e.target.dataset.cliente;
+        try {
+            const resultado = await fetch(`http://localhost:3000/clientes/${id}`,{
+                method: 'DELETE',
+            });
+                window.location.href = 'index.html' 
+        } catch (error) {
+            console.log(error);
+        }
+    }
 }
 
-export async function actualizarCliente(id){
-    console.log('actualizando')
+export async function obtenerCliente(id,inputNombre,inputCorreo, inputTelefono, inputEmpresa){
+    
+    // llamando a la API para obtener los datos del cliente y
+    // rellenar los campos del form 
+    const url = `http://localhost:3000/clientes/${id}`
+
+    try {
+
+        const resultado = await fetch(url);
+        const data = await resultado.json();
+        
+        // extraemos los valores del objeto
+        const {nombre, correo,telefono,empresa} = data; 
+
+        // rellenamos los campos con los valores 
+
+        inputNombre.value = nombre;
+        inputCorreo.value = correo;
+        inputTelefono.value = telefono;
+        inputEmpresa.value = empresa;
+        
+    } catch (error) {
+        console.log(error)
+    }
+    
+
+}
+
+export async function actualizarCliente(updatedClient){
+    const {id} = updatedClient;
+    try {
+
+        const resultado = await fetch(`http://localhost:3000/clientes/${id}`,{
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(
+                updatedClient
+            )
+        });
+            window.location.href = 'index.html' 
+    } catch (error) {
+        console.log(error);
+    }
+    
+
 }
